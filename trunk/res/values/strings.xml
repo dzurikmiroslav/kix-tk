@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">KixTK</string>
+
+    <string name="menu_note">Poznámka</string>
+    <string name="menu_filter">Filter</string>
+    <string name="menu_preferences">Nastavenia</string>
+    <string name="menu_city">Mesto</string>
+    <string name="menu_line_sort">Druhy liniek</string>
+    	
+    <string name="menu_download">Stiahnuť linky</string>
+    
+    <string name="pref_database">Databáza</string>
+    <string name="pref_import_file">Import súboru</string>
+    <string name="pref_export_file">Export súboru</string>
+    <string name="pref_parse">Import z webu</string>
+    	
+    <string name="fetching_title">Sťahujem údaje</string>
+	<string name="fetching_line">Stahujem linku: %1$s\nzastávku:\n%2$s smer %3$s</string>
+	<string name="storing_line">Ukladám údaje do databázy&#8230;</string>
+    <string name="fetching_message">Čakajte prosím, stahujú sa údaje&#8230;</string>
+    <string name="successfuly_fetched">Úspešne bolo stiahnutých %1$d linkek</string>	
+
+    <string name="select_lines">Zvoľte linky</string>
+    <string name="select_city">Zvoľte mesto</string>
+    <string name="select_sort">Zvoľte druh</string>
+    <string name="select_sorts">Zvoľte druhy liek</string>
+    <string name="parse_note">Stahovať poznámky</string>
+    <string name="mark">Označiť</string>
+    <string name="parse">Hail to the king, baby!!!</string>
+    	
+    <string name="parser_title">Import z webu</string>
+    
+    <string name="line_title">Linka</string>
+    <string name="source_title">Z kade</string>
+    <string name="destination_title">Kam</string>
+    <string name="sort_dialog_title">Druhy</string>
+    <string name="note_title">Poznámka</string>	
+    <string name="table_title">Tabuľka</string>	
+    <string name="preference_title">Nastavenia</string>			
+    <string name="select_file_title">Vyberte súbor</string>
+    
+    <string name="line">Linka: %1$s</string>
+    <string name="line_valid_from">Linka: %1$s (platny od %2$s)</string>
+    <string name="line_valid_to">Linka: %1$s (platny do %2$s)</string>
+    <string name="line_valid_from_to">Linka: %1$s (platny od %2$s do %3$s)</string>
+    <string name="source">Zastavka: %1$s</string>
+    <string name="destination">Smer: %1$s</string>
+    
+    <string name="nearest_bus">Najblizší spoj za: %1$s</string>
+    <string name="maybe_tomorow">možno až zajtra :(</string>
+    
+    <string-array name="sorts">
+    	<item>Po-Pia (Školský rok)</item>
+        <item>Po-Pia (Školské prázdniny)</item>
+        <item>So-Ne, Sviatok</item>
+    </string-array>
+</resources>
