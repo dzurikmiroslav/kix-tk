@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/nearest_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nearest_bus" />
+
+    <TextView
+        android:id="@+id/line_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/line" />
+
+    <TextView
+        android:id="@+id/source_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/source" />
+
+    <TextView
+        android:id="@+id/destination_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/destination" />
+
+    <ListView
+        android:id="@+id/list_wiew"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+</LinearLayout>
