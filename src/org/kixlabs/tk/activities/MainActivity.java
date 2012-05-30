@@ -123,7 +123,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	public void onSelectSource(SourceSO source) {
 		mSource = source;
-		mTableFragment.setDisplayData(mLine, mDestination, mSource);
+		mTableFragment.setDisplayData(mSource);
 		mViewPager.setCurrentItem(3);
 	}
 
