@@ -1,6 +1,6 @@
 package org.kixlabs.tk.service;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.kixlabs.tk.service.so.CitySO;
@@ -24,7 +24,7 @@ public interface ServiceDatabaseHelper {
 
 	public List<TableRowSO> getTable(SourceSO source, int sortFlag);
 
-	public Date getNearest(SourceSO source, int sortFlag);
+	public Calendar getNearest(SourceSO source, int sortFlag);
 
 	public String getNote(SourceSO source);
 }

@@ -39,13 +39,6 @@
     <string name="preference_title">Nastavenia</string>			
     <string name="select_file_title">Vyberte súbor</string>
     
-    <string name="line">Linka: %1$s</string>
-    <string name="line_valid_from">Linka: %1$s (platny od %2$s)</string>
-    <string name="line_valid_to">Linka: %1$s (platny do %2$s)</string>
-    <string name="line_valid_from_to">Linka: %1$s (platny od %2$s do %3$s)</string>
-    <string name="source">Zastavka: %1$s</string>
-    <string name="destination">Smer: %1$s</string>
-    
     <string name="nearest_bus">Najblizší spoj za: %1$s</string>
     <string name="maybe_tomorow">možno až zajtra :(</string>
     

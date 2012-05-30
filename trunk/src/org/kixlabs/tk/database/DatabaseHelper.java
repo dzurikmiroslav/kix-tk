@@ -328,23 +328,22 @@ public class DatabaseHelper extends SQLiteOpenHelper implements ServiceDatabaseH
 	}
 
 	@Override
-	public Date getNearest(SourceSO source, int sortFlag) {
-		Date date = new Date();
-		Cursor cursor = mDatabase.query(
-				false,
-				"Row JOIN Cell",
-				new String[] { "Hour", "Minute" },
+	public Calendar getNearest(SourceSO source, int sortFlag) {
+		Calendar calendar = Calendar.getInstance();
+		Cursor cursor = mDatabase.query(false, "Row JOIN Cell", new String[] { "Hour", "Minute" },
 				"Cell.Row = Row.Id AND Row.BusStop = ? AND Sort & ? AND ((Hour = ? AND Minute > ?) OR (Hour > ?))",
-				new String[] { String.valueOf(source.getId()), String.valueOf(sortFlag), String.valueOf(date.getHours()),
-						String.valueOf(date.getMinutes()), String.valueOf(date.getHours()) }, null, null, "Hour, Minute", "1");
+				new String[] { String.valueOf(source.getId()), String.valueOf(sortFlag), String.valueOf(calendar.get(Calendar.HOUR)),
+						String.valueOf(calendar.get(Calendar.MINUTE)), String.valueOf(calendar.get(Calendar.HOUR)) }, null, null,
+				"Hour, Minute", "1");
 		if (cursor.moveToFirst()) {
-			date.setHours(cursor.getInt(0));
-			date.setMinutes(cursor.getInt(1));
-			date.setSeconds(0);
+			calendar.set(Calendar.HOUR, cursor.getInt(0));
+			calendar.set(Calendar.MINUTE, cursor.getInt(1));
+			calendar.set(Calendar.SECOND, 0);
+			calendar.set(Calendar.MILLISECOND, 0);
 		} else {
-			date = null;
+			calendar = null;
 		}
-		return date;
+		return calendar;
 	}
 
 	@Override
