@@ -2,9 +2,9 @@ package org.kixlabs.tk.activities.adapters;
 
 import java.util.List;
 
+import org.kixlabs.tk.R;
 import org.kixlabs.tk.service.so.TableCellSO;
 import org.kixlabs.tk.service.so.TableRowSO;
-import org.kixlabs.tk.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -36,13 +36,11 @@ public class TableRowAdapter extends ArrayAdapter<TableRowSO> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
 		if (v == null) {
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = inflater.inflate(R.layout.table_item, null);
 		}
 		TableRowSO r = values.get(position);
-		((TextView) v.findViewById(R.id.label_hour)).setText(formatNumber(r
-				.getHour()));
+		((TextView) v.findViewById(R.id.label_hour)).setText(formatNumber(r.getHour()));
 		if (values.get(position).getCells() != null) {
 			StringBuilder builder = new StringBuilder();
 			for (TableCellSO c : values.get(position).getCells()) {
@@ -51,8 +49,7 @@ public class TableRowAdapter extends ArrayAdapter<TableRowSO> {
 					builder.append(c.getNote());
 				builder.append(' ');
 			}
-			((TextView) v.findViewById(R.id.label_minutes)).setText(builder
-					.toString());
+			((TextView) v.findViewById(R.id.label_minutes)).setText(builder.toString());
 		}
 		return v;
 	}

@@ -3,7 +3,7 @@ package org.kixlabs.tk.service.so;
 import java.io.Serializable;
 
 public class LineSortSO implements Serializable {
-	
+
 	private static final long serialVersionUID = 4438728101111689372L;
 
 	private long id;
@@ -36,5 +36,5 @@ public class LineSortSO implements Serializable {
 	public String toString() {
 		return name;
 	}
-	
+
 }

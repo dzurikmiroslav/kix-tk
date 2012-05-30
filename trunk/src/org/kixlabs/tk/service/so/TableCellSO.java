@@ -7,9 +7,9 @@ public class TableCellSO implements Serializable {
 	private static final long serialVersionUID = 8039134624804922020L;
 
 	private int minute;
-	
+
 	private char note;
-	
+
 	public TableCellSO(int minute, char note) {
 		super();
 		this.minute = minute;
@@ -31,7 +31,7 @@ public class TableCellSO implements Serializable {
 	public void setNote(char note) {
 		this.note = note;
 	}
-	
-	//private int sort; ??
-	
+
+	// private int sort; ??
+
 }

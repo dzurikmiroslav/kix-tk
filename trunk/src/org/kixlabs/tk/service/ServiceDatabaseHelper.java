@@ -13,9 +13,9 @@ import org.kixlabs.tk.service.so.TableRowSO;
 public interface ServiceDatabaseHelper {
 
 	public List<CitySO> getCities();
-	
+
 	public List<LineSortSO> getLinesSorts(CitySO city);
-	
+
 	public List<LineSO> getLines(CitySO city, List<LineSortSO> linesSorts);
 
 	public List<DestinationSO> getDestinations(LineSO line);

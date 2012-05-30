@@ -1,5 +1,6 @@
 package org.kixlabs.tk.downloaderservice;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ParserService {
 		downloader.interruptDownloading();
 	}
 
-	public void downloadLine(final DownloaderLineSO line, final FetcherNotificator notificator) throws Exception {
+	public void downloadLine(final DownloaderLineSO line, final FetcherNotificator notificator) throws IOException {
 		try {
 			downloader.downloadLineData(line, notificator);
 			if (notificator != null)
@@ -46,7 +47,7 @@ public class ParserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<DownloaderLineSO> getUnfetchedLines(DownloaderCitySO city, DownloaderLineSortSO lineSort) throws Exception {
+	public List<DownloaderLineSO> getUnfetchedLines(DownloaderCitySO city, DownloaderLineSortSO lineSort) throws IOException {
 		List<DownloaderLineSO> lines = downloader.downloadLines(city, lineSort);
 		databaseHelper.getLinesIdsIfExists(lines);
 		Collection<DownloaderLineSO> exists = new HashSet<DownloaderLineSO>();
@@ -57,13 +58,13 @@ public class ParserService {
 		return lines;
 	}
 
-	public List<DownloaderLineSortSO> getLineSorts(DownloaderCitySO city) throws Exception {
+	public List<DownloaderLineSortSO> getLineSorts(DownloaderCitySO city) throws IOException {
 		List<DownloaderLineSortSO> linesSorts = downloader.downloadLinesSorts(city);
 		databaseHelper.getLinesSortsIdsIfExists(linesSorts);
 		return linesSorts;
 	}
 
-	public List<DownloaderCitySO> getCities() throws Exception {
+	public List<DownloaderCitySO> getCities() throws IOException {
 		List<DownloaderCitySO> cities = downloader.downloadCities();
 		databaseHelper.getCitiesIdsIfExists(cities);
 		return cities;

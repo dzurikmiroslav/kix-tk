@@ -51,28 +51,20 @@ public class DatabaseHelper extends SQLiteOpenHelper implements ServiceDatabaseH
 
 	private static final int DB_VERSION_NUMBER = 1;
 
-	private static final String TABLE_CREATE_CITY = 
-			"CREATE TABLE City (\n" 
-	+ "	Id INTEGER PRIMARY KEY AUTOINCREMENT,\n"	
-	+ "	Name TEXT NOT NULL UNIQUE\n" + ");\n";
+	private static final String TABLE_CREATE_CITY = "CREATE TABLE City (\n" + "	Id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+			+ "	Name TEXT NOT NULL UNIQUE\n" + ");\n";
 
 	private static final String INDEX_CREATE_CITY = "CREATE INDEX CityIndex ON City(Name);\n";
 
-	private static final String TABLE_CREATE_LINE_SORT = "CREATE TABLE LineSort (\n" 
-	+ "	Id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-	+ "	Name TEXT NOT NULL UNIQUE\n" 
-	+ ");\n";
+	private static final String TABLE_CREATE_LINE_SORT = "CREATE TABLE LineSort (\n" + "	Id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+			+ "	Name TEXT NOT NULL UNIQUE\n" + ");\n";
 
 	private static final String INDEX_CREATE_LINE_SORT = "CREATE INDEX LineSortIndex ON LineSort(Name);\n";
 
-	private static final String TABLE_CREATE_LINE = 
-			"CREATE TABLE Line (\n" 
-	+ "	Id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-	+ "	Name TEXT NOT NULL,\n" 
-	+ "	ValidFrom DATE,\n"
-	+ "	ValidTo DATE,\n"
-	+ " City INTEGER REFERENCES City(Id) ON DELETE CASCADE,\n"
-	+ " LineSort INTEGER REFERENCES LineSort(Id) ON DELETE CASCADE\n" + ");\n";
+	private static final String TABLE_CREATE_LINE = "CREATE TABLE Line (\n" + "	Id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+			+ "	Name TEXT NOT NULL,\n" + "	ValidFrom DATE,\n" + "	ValidTo DATE,\n"
+			+ " City INTEGER REFERENCES City(Id) ON DELETE CASCADE,\n"
+			+ " LineSort INTEGER REFERENCES LineSort(Id) ON DELETE CASCADE\n" + ");\n";
 
 	private static final String INDEX_CREATE_LINE = "CREATE INDEX LineIndex ON Line(Name);\n";
 
@@ -242,7 +234,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements ServiceDatabaseH
 		calendar.setTimeInMillis(milliseconds);
 		return calendar;
 	}
-	
+
 	@Override
 	public List<CitySO> getCities() {
 		List<CitySO> list = new ArrayList<CitySO>();
@@ -270,12 +262,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements ServiceDatabaseH
 		List<LineSO> list = new ArrayList<LineSO>();
 		if (city != null) {
 			for (LineSortSO ls : linesSorts) {
-				Cursor cursor = mDatabase.query("Line", new String[] { "Id", "Name", "ValidFrom", "ValidTo" }, "City = ? AND LineSort = ?", new String[] {
-						Long.toString(city.getId()), Long.toString(ls.getId()) }, null, null, "ABS(Name), Name");
+				Cursor cursor = mDatabase.query("Line", new String[] { "Id", "Name", "ValidFrom", "ValidTo" },
+						"City = ? AND LineSort = ?", new String[] { Long.toString(city.getId()), Long.toString(ls.getId()) }, null,
+						null, "ABS(Name), Name");
 				while (cursor.moveToNext())
-					list.add(new LineSO(cursor.getLong(0), cursor.getString(1),
-							milisecondsToCalendar(cursor.getLong(2)), milisecondsToCalendar(cursor.getLong(3))
-							));
+					list.add(new LineSO(cursor.getLong(0), cursor.getString(1), milisecondsToCalendar(cursor.getLong(2)),
+							milisecondsToCalendar(cursor.getLong(3))));
 			}
 		}
 		return list;
@@ -383,7 +375,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements ServiceDatabaseH
 
 	private InsertHelper mInsertRowHelper;
 	private int mRowHourIndex, mRowBusStopIndex;
-	
+
 	@Override
 	public void initDBForInserting() {
 		if (mInsertBusStopHelper == null) {
@@ -558,7 +550,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements ServiceDatabaseH
 			lineSortId = createLineSort(line.getLineSort().getName());
 			line.getLineSort().setId(lineSortId);
 		}
-		long lineId = createLine(line.getName(), cityId, lineSortId, line.getValidFrom().getTimeInMillis(), line.getValidTo().getTimeInMillis());
+		long lineId = createLine(line.getName(), cityId, lineSortId, line.getValidFrom().getTimeInMillis(), line.getValidTo()
+				.getTimeInMillis());
 		line.setId(lineId);
 
 		int position = 0;

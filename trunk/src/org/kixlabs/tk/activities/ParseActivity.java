@@ -179,11 +179,12 @@ public class ParseActivity extends SherlockActivity {
 	}
 
 	private void setupCitiesAndLinesSorts() {
-		mCitiesSpinner.setAdapter(new ArrayAdapter<DownloaderCitySO>(ParseActivity.this, android.R.layout.simple_spinner_item, mCities) {
-			{
-				setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			}
-		});
+		mCitiesSpinner
+				.setAdapter(new ArrayAdapter<DownloaderCitySO>(ParseActivity.this, android.R.layout.simple_spinner_item, mCities) {
+					{
+						setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					}
+				});
 		mCitiesSpinner.setSelection(mSelectedCityPosition);
 
 		mLinesSortsSpinner.setAdapter(new ArrayAdapter<DownloaderLineSortSO>(ParseActivity.this, android.R.layout.simple_spinner_item,
@@ -354,7 +355,7 @@ public class ParseActivity extends SherlockActivity {
 		private boolean mFetchingPhase;
 
 		private boolean canceled = false;
-		
+
 		private DialogInterface.OnCancelListener cancelListener = new DialogInterface.OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface arg0) {
