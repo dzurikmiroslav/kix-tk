@@ -1,5 +1,6 @@
 package org.kixlabs.tk.downloaderservice;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -51,11 +53,15 @@ public class ZoznamDownloader implements Downloader {
 
 	private Semaphore cancelSemaphore = new Semaphore(0);
 
-	private Document jsoupConnect(String url) throws Exception {
+	private Document jsoupConnectWithInterrupt(String url) throws InterruptDownloadingException, IOException {
 		if (cancelSemaphore.tryAcquire()) {
 			Log.i(TAG, "interrup donwloading");
 			throw new InterruptDownloadingException();
 		}
+		return jsoupConnect(url);
+	}
+
+	private Document jsoupConnect(String url) throws IOException {
 		try {
 			return Jsoup.connect(url).timeout(10 * 10000).get();
 		} catch (java.net.SocketTimeoutException e1) {
@@ -67,10 +73,10 @@ public class ZoznamDownloader implements Downloader {
 		}
 	}
 
-	private void downloadBusStopData(DownloaderBusStopSO busStop, String url) throws Exception {
+	private void downloadBusStopData(DownloaderBusStopSO busStop, String url) throws IOException, InterruptDownloadingException {
 		Log.i(TAG, "download busstop data " + url);
 
-		Document document = jsoupConnect(url);
+		Document document = jsoupConnectWithInterrupt(url);
 		List<Short> sorts = new LinkedList<Short>();
 		Elements days = document.select(".nazov_dna");
 
@@ -143,9 +149,10 @@ public class ZoznamDownloader implements Downloader {
 	}
 
 	@Override
-	public void downloadLineData(DownloaderLineSO line, FetcherNotificator notificator) throws Exception {
+	public void downloadLineData(DownloaderLineSO line, FetcherNotificator notificator) throws IOException,
+			InterruptDownloadingException {
 		Log.i(TAG, "download line data " + line.getUrl());
-		Document document = jsoupConnect(line.getUrl());
+		Document document = jsoupConnectWithInterrupt(line.getUrl());
 		if (notificator != null)
 			notificator.onStartDownloading(document.select(".tabulka a:not(.button)").size());
 		String validationStr = document.select(".h0").get(0).text();
@@ -215,7 +222,7 @@ public class ZoznamDownloader implements Downloader {
 	}
 
 	@Override
-	public List<DownloaderCitySO> downloadCities() throws Exception {
+	public List<DownloaderCitySO> downloadCities() throws IOException {
 		List<DownloaderCitySO> citiesSo = new ArrayList<DownloaderCitySO>();
 		Document document = jsoupConnect(this.url + "/transport/mhd.html");
 		Elements cities = document.select("#mesto ul ul a");
@@ -233,7 +240,7 @@ public class ZoznamDownloader implements Downloader {
 	}
 
 	@Override
-	public List<DownloaderLineSortSO> downloadLinesSorts(DownloaderCitySO city) throws Exception {
+	public List<DownloaderLineSortSO> downloadLinesSorts(DownloaderCitySO city) throws IOException {
 		List<DownloaderLineSortSO> sortsSo = new ArrayList<DownloaderLineSortSO>();
 		Document document = jsoupConnect(city.getUrl());
 		Element table = document.select("table").get(0);
@@ -247,7 +254,7 @@ public class ZoznamDownloader implements Downloader {
 	}
 
 	@Override
-	public List<DownloaderLineSO> downloadLines(DownloaderCitySO city, DownloaderLineSortSO lineSort) throws Exception {
+	public List<DownloaderLineSO> downloadLines(DownloaderCitySO city, DownloaderLineSortSO lineSort) throws IOException {
 		List<DownloaderLineSO> lineInfos = new ArrayList<DownloaderLineSO>();
 		Document document = jsoupConnect(city.getUrl());
 		Element table = document.select("table").get(0);

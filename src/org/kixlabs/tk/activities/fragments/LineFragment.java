@@ -5,15 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.kixlabs.tk.R;
 import org.kixlabs.tk.activities.MainActivity;
 import org.kixlabs.tk.service.so.CitySO;
 import org.kixlabs.tk.service.so.LineSO;
 import org.kixlabs.tk.service.so.LineSortSO;
-import org.kixlabs.tk.R;
-
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,12 +20,14 @@ import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class LineFragment extends SherlockListFragment {
 
@@ -61,12 +59,12 @@ public class LineFragment extends SherlockListFragment {
 		mActivity = (MainActivity) activity;
 		mActivity.setLineFragment(this);
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		
+
 		mCities = mActivity.getService().getCities();
 		SharedPreferences preferences = mActivity.getPreferences(Context.MODE_WORLD_READABLE);
 		long cityId = preferences.getLong(SELECTED_CITY_KEY, -1);
@@ -147,7 +145,7 @@ public class LineFragment extends SherlockListFragment {
 		mSelectedPosition = position;
 		mActivity.onSelectLine(item);
 	}
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
 		inflater.inflate(R.menu.lines, menu);

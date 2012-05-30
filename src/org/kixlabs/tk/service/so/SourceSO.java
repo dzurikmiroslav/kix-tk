@@ -10,7 +10,7 @@ public class SourceSO implements Serializable {
 
 	private String name;
 
-	 public SourceSO(long id, String name) {
+	public SourceSO(long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;

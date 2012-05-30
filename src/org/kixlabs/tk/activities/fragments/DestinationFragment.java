@@ -7,13 +7,13 @@ import org.kixlabs.tk.activities.MainActivity;
 import org.kixlabs.tk.service.so.DestinationSO;
 import org.kixlabs.tk.service.so.LineSO;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.actionbarsherlock.app.SherlockListFragment;
 
 public class DestinationFragment extends SherlockListFragment {
 
@@ -22,13 +22,13 @@ public class DestinationFragment extends SherlockListFragment {
 	private LineSO mLine;
 
 	private int mSelectedPosition = -1;
-	
+
 	private List<DestinationSO> mData;
 
 	static final private String LINE_KEY = "line";
-	
+
 	static final private String SELECTED_POSITION_KEY = "selected-position";
-	
+
 	static final private String DATA_KEY = "data";
 
 	public void setDisplayData(LineSO line) {
@@ -83,7 +83,7 @@ public class DestinationFragment extends SherlockListFragment {
 		mActivity = (MainActivity) activity;
 		mActivity.setDestinationFragment(this);
 	}
-	
+
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		mSelectedPosition = position;

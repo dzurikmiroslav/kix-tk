@@ -11,6 +11,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.kixlabs.tk.DayFlags;
+import org.kixlabs.tk.R;
 import org.kixlabs.tk.activities.MainActivity;
 import org.kixlabs.tk.activities.adapters.TableRowAdapter;
 import org.kixlabs.tk.service.so.DestinationSO;
@@ -18,20 +19,12 @@ import org.kixlabs.tk.service.so.LineSO;
 import org.kixlabs.tk.service.so.SourceSO;
 import org.kixlabs.tk.service.so.TableRowSO;
 
-import org.kixlabs.tk.R;
-
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
@@ -45,6 +38,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 public class TableFragment extends SherlockFragment {
 
 	private static final int INTERNAL_PROGRESS_CONTAINER_ID = 0x00ff0002;
@@ -52,9 +50,9 @@ public class TableFragment extends SherlockFragment {
 	private static final int INTERNAL_TABLE_CONTAINER_ID = 0x00ff0003;
 
 	private static final String LINE_KEY = "line";
-	
+
 	private static final String DESTINATION_KEY = "destination";
-	
+
 	private static final String SOURCE_KEY = "source";
 
 	private static final String TABLE_DATA_KEY = "table-data";
@@ -318,7 +316,7 @@ public class TableFragment extends SherlockFragment {
 		mActivity = (MainActivity) activity;
 		mActivity.setTableFragment(this);
 	}
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.table, menu);

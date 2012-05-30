@@ -17,7 +17,7 @@ public class DayFlags {
 		// sobota, nedela, sviatok
 		if (day == Calendar.SATURDAY || day == Calendar.SUNDAY)
 			return DayFlags.WEEKENDS_FERIAE_DAYS;
-		
+
 		// TODO ostatne sviatky
 
 		// prac. den skolske prazdniny

@@ -2,11 +2,8 @@ package org.kixlabs.tk.activities;
 
 import java.io.IOException;
 
-import org.kixlabs.tk.TkApplication;
 import org.kixlabs.tk.R;
-
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.lamerman.FileDialog;
+import org.kixlabs.tk.TkApplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,6 +15,9 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.lamerman.FileDialog;
 
 public class PreferenceActivity extends SherlockPreferenceActivity {
 
