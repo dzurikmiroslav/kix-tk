@@ -1,50 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">KixTK</string>
 
+    <string name="app_name">KixTK</string>
     <string name="menu_note">Poznámka</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_preferences">Nastavenia</string>
+    <string name="menu_cancel">Ukončiť</string>
     <string name="menu_city">Mesto</string>
     <string name="menu_line_sort">Druhy liniek</string>
-    	
-    <string name="menu_download">Stiahnuť linky</string>
-    
-    <string name="pref_database">Databáza</string>
-    <string name="pref_import_file">Import súboru</string>
-    <string name="pref_export_file">Export súboru</string>
-    <string name="pref_parse">Import z webu</string>
-    	
-    <string name="fetching_title">Sťahujem údaje</string>
-	<string name="fetching_line">Stahujem linku: %1$s\nzastávku:\n%2$s smer %3$s</string>
-	<string name="storing_line">Ukladám údaje do databázy&#8230;</string>
-    <string name="fetching_message">Čakajte prosím, stahujú sa údaje&#8230;</string>
-    <string name="successfuly_fetched">Úspešne bolo stiahnutých %1$d linkek</string>	
 
-    <string name="select_lines">Zvoľte linky</string>
-    <string name="select_city">Zvoľte mesto</string>
-    <string name="select_sort">Zvoľte druh</string>
-    <string name="select_sorts">Zvoľte druhy liek</string>
-    <string name="parse_note">Stahovať poznámky</string>
-    <string name="mark">Označiť</string>
-    <string name="parse">Hail to the king, baby!!!</string>
-    	
-    <string name="parser_title">Import z webu</string>
-    
-    <string name="line_title">Linka</string>
-    <string name="source_title">Z kade</string>
-    <string name="destination_title">Kam</string>
+    <!-- Prehliadanie -->
+    <string name="line_title">Vyberte linku</string>
+    <string name="destination_title">Vyberte smer</string>
+    <string name="source_title">Vyberte zastávku</string>
+    <string name="time_table_title">Linka %1$s: %2$s smer %3$s</string>
     <string name="sort_dialog_title">Druhy</string>
-    <string name="note_title">Poznámka</string>	
-    <string name="table_title">Tabuľka</string>	
-    <string name="preference_title">Nastavenia</string>			
-    <string name="select_file_title">Vyberte súbor</string>
-    
+    <string name="note_title">Poznámka</string>
     <string name="nearest_bus">Najblizší spoj za: %1$s</string>
     <string name="maybe_tomorow">možno až zajtra :(</string>
-    
-    <string-array name="sorts">
-    	<item>Po-Pia (Školský rok)</item>
+    <string name="press_back_again">Stlačte este raz pre ukončenie</string>
+
+    <string-array name="entries_sorts">
+        <item>Po-Pia (Školský rok)</item>
         <item>Po-Pia (Školské prázdniny)</item>
         <item>So-Ne, Sviatok</item>
     </string-array>
+
+    <!-- Nastavenia -->
+    <string name="preference_title">Nastavenia</string>
+    <string name="pref_database">Databázka</string>
+    <string name="pref_import_db">Import databázky</string>
+    <string name="pref_import_db_summary">Načítať datábázku liniek z expornovaného súboru</string>
+    <string name="pref_export_db">Export databázky</string>
+    <string name="pref_export_db_summary">Exportovať všetky linky do jedného súboru</string>
+    <string name="pref_download_db">Stiahnuť linky</string>
+    <string name="pref_download_db_summary">Stiahnutie liniek cez internet</string>
+    <string name="pref_look">Vzhľad</string>
+    <string name="pref_theme">Téma</string>
+    <string name="select_file_title">Vyberte súbor</string>
+
+    <string-array name="entries_themes">
+        <item>Svetlá</item>
+        <item>Temná</item>
+        <item>Svetlá (Temný ActionBar)</item>
+    </string-array>
+
+    <string name="pref_other">Ostatné</string>
+    <string name="pref_author">Autor</string>
+    <string name="pref_author_summary">Copyright &#169; 2012\nMiroslav Dzúrik</string>
+    <string name="pref_licence">Licencia</string>
+    <string name="pref_licence_summary">Apache License 2.0</string>
+    <string name="pref_about">O aplikácii</string>
+    <string name="about_title">O KixTK</string>
+    <string name="about_text">KixTK je program na offline prehliadanie cestovných poriadkov mestkej hromadnej dopravy.\n\nKontak, zdrojáky, postrehy, odozva (najmä pozitívna :-) a aktualizácie na: http://code.google.com/p/kix-tk/\n\n\nTravel like a boss…</string>
+    <string name="pref_version">Verzia</string>
+    <string name="pref_version_summary">1.0 snapshot 1</string>
+    <!--  -->
+
+
+    <!-- Stahovanie -->
+    <string name="download_lines_title">Stiahnuť linky</string>
+    <string name="fetching_line_title">Sťahujem údaje</string>
+    <string name="storing_line_title">Ukladám údaje do databázky</string>
+    <string name="fetching_storing_line_message">Linku %1$s (%2$d z %3$d)</string>
+    <string name="fetching_line_message">Sťahujem linku %1$s (%2$d z %3$d)</string>
+    <string name="storing_line_message">Ukládam linku %1$s (%2$d z %3$d) do databázky</string>
+    <string name="fetching_message">Čakajte prosím, stahujú sa údaje&#8230;</string>
+    <string name="successfuly_fetched_title">Sťahovanie bolo ukončené</string>
+    <string name="successfuly_fetched_message">Úspešne bolo stiahnutých %1$d linek</string>
+    <string name="select_lines">Zvoľte linky</string>
+    <string name="select_city">Zvoľte mesto</string>
+    <string name="select_city">Zvoľte mesto</string>
+    <string name="select_sort">Zvoľte druh</string>
+    <string name="select_sorts">Zvoľte druhy liniek</string>
+    <string name="parse_note">Stahovať poznámky</string>
+    <string name="select">Označiť</string>
+    <string name="download_selected">Stiahnuť označené linky</string>
+    <string name="network_error">Pripojenie zlyhalo, overte nastavenie stete&#8230;</string>
+    <string name="no_line_to_download">Neni co stahovat, najprv oznacte linky.</string>
+
+    <!-- FileDialog -->
+    <string name="location">Umiestnenie</string>
+    <string name="cant_read_folder">Prečinok \'%1$s\' sa nedá čítať, pravdepodobne nemáte dostatočné práva&#8230;</string>
+    <string name="nnew">Nový</string>
+    <string name="select">Vybrať</string>
+    <string name="file_name">Názov súboru:</string>
+    <string name="cancel">Ukončiť</string>
+    <string name="create">Vytvoriť</string>
+    <string name="no_data">Nijaké súbory</string>
+    <!--  -->
+
 </resources>
