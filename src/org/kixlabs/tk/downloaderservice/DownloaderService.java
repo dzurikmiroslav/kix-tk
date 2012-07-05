@@ -200,6 +200,7 @@ public class DownloaderService {
 			for (DownloaderBusStop bs : line.getBusStops()) {
 				Thread.sleep(0); // vyhodi InterruptedException ak bolo vlakno
 									// ukoncene
+				mDatabase.beginTransaction();
 				if (noficator != null)
 					noficator.onStororeBusStop(position++);
 				long destinationId = insertOrGetBusStopNameId(bs.getDestination());
@@ -219,8 +220,12 @@ public class DownloaderService {
 					values.put("Note", bs.getNote());
 					mDatabase.update("BusStop", values, "Id = ?", new String[] { Long.toString(busStopId) });
 				}
+				mDatabase.setTransactionSuccessful();
+				mDatabase.endTransaction();
 			}
 		} catch (InterruptedException e) {
+			if (mDatabase.inTransaction())
+				mDatabase.endTransaction();
 			if (newCityId != -1)
 				mDatabase.delete("City", "Id = ?", new String[] { Long.toString(newCityId) });
 			if (newLineSortId != -1)
