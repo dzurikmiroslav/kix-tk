@@ -162,24 +162,37 @@ public class DownloaderService {
 		return mDatabase.insert("City", null, values);
 	}
 
+	/**
+	 * TODO rychlejsie by to ficalo v transakcii
+	 * 
+	 * TODO vyriesit prerusenie transakciou, pada na prekrocenie heap size :-(
+	 * 
+	 * @param line
+	 * @param noficator
+	 * @throws InterruptedException
+	 */
 	public void createLine(DownloaderLine line, DownloaderNotificator noficator) throws InterruptedException {
-		mDatabase.beginTransaction();
+		// mDatabase.beginTransaction();
+		// try {
+		long newCityId = -1;
+		long newLineSortId = -1;
+		long lineId = -1;
 		try {
 			long cityId = line.getCity().getId();
 			if (cityId == -1) {
-				cityId = createCity(line.getCity().getName());
+				newCityId = cityId = createCity(line.getCity().getName());
 				line.getCity().setId(cityId);
 			}
 			long lineSortId = line.getLineSort().getId();
 			if (lineSortId == -1) {
 				ContentValues values = new ContentValues();
 				values.put("Name", line.getLineSort().getName());
-				lineSortId = mDatabase.insert("LineSort", null, values);
+				newLineSortId = lineSortId = mDatabase.insert("LineSort", null, values);
 				line.getLineSort().setId(lineSortId);
 			}
 			Thread.sleep(0); // vyhodi InterruptedException ak bolo vlakno
 								// ukoncene
-			long lineId = insertLine(line.getName(), cityId, lineSortId, line.getValidFrom().getTimeInMillis(), line.getValidTo()
+			lineId = insertLine(line.getName(), cityId, lineSortId, line.getValidFrom().getTimeInMillis(), line.getValidTo()
 					.getTimeInMillis());
 			line.setId(lineId);
 
@@ -207,11 +220,19 @@ public class DownloaderService {
 					mDatabase.update("BusStop", values, "Id = ?", new String[] { Long.toString(busStopId) });
 				}
 			}
-			mDatabase.setTransactionSuccessful();
-		} finally {
-			mDatabase.endTransaction();
+		} catch (InterruptedException e) {
+			if (newCityId != -1)
+				mDatabase.delete("City", "Id = ?", new String[] { Long.toString(newCityId) });
+			if (newLineSortId != -1)
+				mDatabase.delete("LineSort", "Id = ?", new String[] { Long.toString(newLineSortId) });
+			if (lineId != -1)
+				mDatabase.delete("Line", "Id = ?", new String[] { Long.toString(lineId) });
+			throw e;
 		}
-
+		// mDatabase.setTransactionSuccessful();
+		// } finally {
+		// mDatabase.endTransaction();
+		// }
 	}
 
 	private long createOrGetHour(long busStopId, byte hour) {

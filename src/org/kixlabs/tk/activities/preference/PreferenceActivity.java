@@ -27,9 +27,11 @@ public class PreferenceActivity extends SherlockPreferenceActivity {
 
 	public static final String TAG = "PreferenceActivity";
 
-	private final int REQUEST_EXPORT = 213847239;
+	public static final int RESULT_DB_CHANGED = 47200;
 
-	private final int REQUEST_IMPORT = 213847238;
+	private static final int REQUEST_EXPORT = 47201;
+	private static final int REQUEST_IMPORT = 47202;
+	private static final int REQUEST_DOWNLOAD = 47203;
 
 	private DatabaseHelper mDatabaseHelper;
 
@@ -79,7 +81,8 @@ public class PreferenceActivity extends SherlockPreferenceActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				Intent intent = new Intent(PreferenceActivity.this, DownloadActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				startActivity(intent);
+				startActivityForResult(intent, REQUEST_DOWNLOAD);
+				setResult(RESULT_DB_CHANGED);
 				return false;
 			}
 		});
@@ -123,10 +126,11 @@ public class PreferenceActivity extends SherlockPreferenceActivity {
 	@Override
 	protected synchronized void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-
-		if (resultCode == Activity.RESULT_OK) {
-			String fileName = data.getStringExtra(FileDialog.RESULT_PATH);
-			if (requestCode == REQUEST_EXPORT) {
+		
+		switch (requestCode) {
+		case REQUEST_EXPORT:
+			if (resultCode == Activity.RESULT_OK) {
+				String fileName = data.getStringExtra(FileDialog.RESULT_PATH);
 				try {
 					mDatabaseHelper.exportData(fileName);
 					Toast.makeText(PreferenceActivity.this, R.string.database_exported, Toast.LENGTH_SHORT).show();
@@ -143,9 +147,14 @@ public class PreferenceActivity extends SherlockPreferenceActivity {
 					});
 					dialog.show();
 				}
-			} else if (requestCode == REQUEST_IMPORT) {
+			}
+			break;
+		case REQUEST_IMPORT:
+			if (resultCode == Activity.RESULT_OK) {
+				String fileName = data.getStringExtra(FileDialog.RESULT_PATH);
 				try {
 					mDatabaseHelper.importData(fileName);
+					setResult(RESULT_DB_CHANGED);
 					Toast.makeText(PreferenceActivity.this, R.string.database_imported, Toast.LENGTH_SHORT).show();
 				} catch (IOException e) {
 					Log.e(TAG, "Cant import db from file", e);
@@ -162,6 +171,15 @@ public class PreferenceActivity extends SherlockPreferenceActivity {
 					e.printStackTrace();
 				}
 			}
+			break;
+		case REQUEST_DOWNLOAD:
+			if (resultCode == DownloadActivity.RESULT_LINES_DOWNLOADED) {
+				setResult(RESULT_DB_CHANGED);
+			}
+			break;
+		default:
+			break;
 		}
+
 	}
 }
