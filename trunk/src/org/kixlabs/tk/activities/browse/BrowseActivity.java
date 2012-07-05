@@ -21,7 +21,9 @@ public class BrowseActivity extends SherlockFragmentActivity {
 	private ViewPager mViewPager;
 
 	private BrowseWorkFragment mWorkFragment;
-
+	
+	private static final int REQUEST_SETTINGS_ACTIVITY = 4701;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setTheme(TkApplication.getAppTheme());
@@ -81,11 +83,21 @@ public class BrowseActivity extends SherlockFragmentActivity {
 		return false;
 	}
 	
+	@Override
+	protected synchronized void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == REQUEST_SETTINGS_ACTIVITY) {
+			if (resultCode == PreferenceActivity.RESULT_DB_CHANGED){
+				mWorkFragment.refresh();
+			}
+		}
+	}
+	
 	private void showPreferenceActivity() {
 		mWorkFragment.setRealyExitFalse();
 		Intent intent = new Intent(this, PreferenceActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		startActivity(intent);
+		startActivityForResult(intent, REQUEST_SETTINGS_ACTIVITY);
 	}
 
 	public void slideToPage(int page) {

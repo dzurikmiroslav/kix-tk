@@ -315,13 +315,7 @@ public class BrowseWorkFragment extends SherlockFragment {
 		}
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		TkApplication app = (TkApplication) mActivity.getApplication();
-		mBrowseService = new BrowseService(app.getDatabaseHelper());
-
+	public void refresh() {
 		mCities = mBrowseService.getCities();
 
 		SharedPreferences preferences = getActivity().getPreferences(Context.MODE_WORLD_READABLE);
@@ -352,8 +346,18 @@ public class BrowseWorkFragment extends SherlockFragment {
 			mSelectedLinesSorts = new ArrayList<LineSort>(mLinesSorts);
 		}
 		mLines = mBrowseService.getLines(mSelectedCity, mSelectedLinesSorts);
+	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		mSortFlag = DayFlags.getCurrentDayFlag();
+		
+		TkApplication app = (TkApplication) mActivity.getApplication();
+		mBrowseService = new BrowseService(app.getDatabaseHelper());
+
+		refresh();
 
 		setRetainInstance(true);
 	}

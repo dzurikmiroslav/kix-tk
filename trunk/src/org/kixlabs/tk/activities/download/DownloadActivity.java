@@ -15,7 +15,9 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
 public class DownloadActivity extends SherlockFragmentActivity {
-
+	
+	public static final int RESULT_LINES_DOWNLOADED = 13847300;
+	
 	public static class UIFragment extends SherlockFragment {
 		private DownloadWorkFragment mWorkFragment;
 

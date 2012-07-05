@@ -319,6 +319,8 @@ public class DownloadWorkFragment extends SherlockFragment {
 					mCurrentLineName = line.getName();
 					mDownloaderService.downloadLine(line, notificator, mParseNotesCheckBox.isChecked());
 					mCurrentLine++;
+					if (mCurrentLine == 1)
+						getActivity().setResult(DownloadActivity.RESULT_LINES_DOWNLOADED);
 				}
 			} catch (IOException e) {
 				Log.e(TAG, "Probably have connection problem");
