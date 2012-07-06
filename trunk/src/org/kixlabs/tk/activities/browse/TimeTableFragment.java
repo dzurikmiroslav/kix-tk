@@ -216,8 +216,10 @@ public class TimeTableFragment extends SherlockFragment {
 	}
 
 	private void updateNearest() {
+		mNearestTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 		if (mWorkFragment.getNearest() == null) {
 			mNearestTextView.setText(R.string.maybe_tomorow);
+			mNearestTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.trollface, 0);
 		} else {
 			Calendar now = Calendar.getInstance();
 			if (mWorkFragment.getNearest().before(now))
@@ -229,7 +231,10 @@ public class TimeTableFragment extends SherlockFragment {
 				dMinutes += 60;
 				dHours--;
 			}
-
+			
+			if (dHours == 0 && dMinutes <= 1)
+				mNearestTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.kiddingface, 0);
+				
 			StringBuilder builder = new StringBuilder();
 			builder.append(String.format("%02d:%02d", dHours, dMinutes));
 			builder.append(String.format(" (%1$tH:%1$tM)", mWorkFragment.getNearest()));
