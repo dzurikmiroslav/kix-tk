@@ -88,7 +88,7 @@ public class DownloadWorkFragment extends SherlockFragment {
 			try {
 				mCities = mDownloaderService.getCities();
 			} catch (IOException e) {
-				Log.e("TAG", "Probably have connection problem");
+				Log.e(TAG, "Probably have connection problem");
 				showNetworkErrorDialog();
 			}
 			return null;
@@ -133,7 +133,7 @@ public class DownloadWorkFragment extends SherlockFragment {
 			try {
 				mLinesSorts = mDownloaderService.getLineSorts(mCities.get(mSelectedCityPosition));
 			} catch (IOException e) {
-				Log.e("TAG", "Probably have connection problem");
+				Log.e(TAG, "Probably have connection problem");
 				showNetworkErrorDialog();
 			}
 			return null;
@@ -183,7 +183,7 @@ public class DownloadWorkFragment extends SherlockFragment {
 				for (DownloaderLine l : mLines)
 					mLinesNames[i++] = l.getName();
 			} catch (IOException e) {
-				Log.e("TAG", "Probably have connection problem");
+				Log.e(TAG, "Probably have connection problem");
 				showNetworkErrorDialog();
 			}
 			return null;
@@ -443,9 +443,9 @@ public class DownloadWorkFragment extends SherlockFragment {
 
 	public static class NewtowrkErrorDialogFragment extends SherlockDialogFragment {
 
-		public static final String TAG = "ProgressDialogFragment";
+		public static final String TAG = "NewtowrkErrorDialogFragment";
 
-		public static NewtowrkErrorDialogFragment getInstance() {
+		public static NewtowrkErrorDialogFragment newInstance() {
 			return new NewtowrkErrorDialogFragment();
 		}
 
@@ -470,7 +470,7 @@ public class DownloadWorkFragment extends SherlockFragment {
 
 		public static final String TAG = "SelectLinesDialogFragment";
 
-		public static SelectLinesDialogFragment getInstance() {
+		public static SelectLinesDialogFragment newInstance() {
 			return new SelectLinesDialogFragment();
 		}
 
@@ -500,7 +500,7 @@ public class DownloadWorkFragment extends SherlockFragment {
 			@Override
 			public void run() {
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
-				ft.add(NewtowrkErrorDialogFragment.getInstance(), NewtowrkErrorDialogFragment.TAG);
+				ft.add(NewtowrkErrorDialogFragment.newInstance(), NewtowrkErrorDialogFragment.TAG);
 				ft.commitAllowingStateLoss();
 			}
 		});
@@ -530,7 +530,7 @@ public class DownloadWorkFragment extends SherlockFragment {
 		if (mLines == null)
 			return;
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
-		ft.add(SelectLinesDialogFragment.getInstance(), SelectLinesDialogFragment.TAG);
+		ft.add(SelectLinesDialogFragment.newInstance(), SelectLinesDialogFragment.TAG);
 		ft.commitAllowingStateLoss();
 	}
 

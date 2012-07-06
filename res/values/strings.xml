@@ -17,7 +17,7 @@
     <string name="sort_dialog_title">Druhy</string>
     <string name="note_title">Poznámka</string>
     <string name="nearest_bus">Najblizší spoj za: %1$s</string>
-    <string name="maybe_tomorow">možno až zajtra :(</string>
+    <string name="maybe_tomorow">možno až zajtra</string>
     <string name="press_back_again">Stlačte ešte raz pre ukončenie</string>
 
     <string-array name="entries_sorts">
