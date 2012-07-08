@@ -30,9 +30,22 @@ public class LineFragment extends SherlockListFragment {
 
 		public static final String TAG = "CityDialogFragment";
 
+		private static final String CITY_NAMES = "city-names";
+		private static final String CITY_POSITION = "city-position";
+
+		private String[] mCityNames;
+		private int mCityPosition;
+
 		public static CityDialogFragment newInstance() {
 			CityDialogFragment fragment = new CityDialogFragment();
 			return fragment;
+		}
+
+		@Override
+		public void onSaveInstanceState(Bundle bundle) {
+			bundle.putInt(CITY_POSITION, mCityPosition);
+			bundle.putStringArray(CITY_NAMES, mCityNames);
+			super.onSaveInstanceState(bundle);
 		}
 
 		@Override
@@ -42,15 +55,26 @@ public class LineFragment extends SherlockListFragment {
 
 			AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
 			dialog.setTitle(R.string.select_city);
-			dialog.setSingleChoiceItems(new ArrayAdapter<City>(getActivity(), android.R.layout.simple_list_item_single_choice,
-					workFragment.getCities()), workFragment.getCities().indexOf(workFragment.getSelectedCity()),
-					new OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							workFragment.onCitySelected(workFragment.getCities().get(which));
-							dialog.dismiss();
-						}
-					});
+
+			if (savedInstanceState != null && savedInstanceState.containsKey(CITY_NAMES)) {
+				mCityPosition = savedInstanceState.getInt(CITY_POSITION);
+				mCityNames = savedInstanceState.getStringArray(CITY_NAMES);
+			} else {
+				mCityNames = new String[workFragment.getCities().size()];
+				mCityPosition = workFragment.getCities().indexOf(workFragment.getSelectedCity());
+				int i = 0;
+				for (City c : workFragment.getCities()) {
+					mCityNames[i++] = c.getName();
+				}
+			}
+
+			dialog.setSingleChoiceItems(mCityNames, mCityPosition, new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					workFragment.onCitySelected(workFragment.getCities().get(which));
+					dialog.dismiss();
+				}
+			});
 			return dialog.create();
 		}
 	}
@@ -133,7 +157,7 @@ public class LineFragment extends SherlockListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		// getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		refresh();
 	}
 

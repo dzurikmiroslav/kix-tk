@@ -17,7 +17,7 @@
     <string name="sort_dialog_title">Druhy</string>
     <string name="note_title">Poznámka</string>
     <string name="nearest_bus">Najblizší spoj za: %1$s</string>
-    <string name="maybe_tomorow">možno až zajtra</string>
+    <string name="maybe_tomorow">Možno až zajtra</string>
     <string name="press_back_again">Stlačte ešte raz pre ukončenie</string>
 
     <string-array name="entries_sorts">
@@ -56,7 +56,7 @@
     <string name="about_title">O KixTK</string>
     <string name="about_text">KixTK je program na offline prehliadanie cestovných poriadkov mestskej hromadnej dopravy.\n\nKontak, zdrojáky, postrehy, odozva (najmä pozitívna :-) a aktualizácie na: http://code.google.com/p/kix-tk/\n\n\nTravel like a boss…</string>
     <string name="pref_version">Verzia</string>
-    <string name="pref_version_summary">1.0 snapshot 1</string>
+    <string name="pref_version_summary">1.0 snapshot 2</string>
     <!--  -->
 
 
